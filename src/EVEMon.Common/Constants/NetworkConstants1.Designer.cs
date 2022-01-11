@@ -19,7 +19,7 @@ namespace EVEMon.Common.Constants {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class NetworkConstants {
@@ -268,7 +268,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /v4/characters/{0:D}/.
+        ///   Looks up a localized string similar to /v5/characters/{0:D}/.
         /// </summary>
         public static string ESICharacterSheet {
             get {
@@ -538,7 +538,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /v1/characters/{0:D}/corporationhistory/.
+        ///   Looks up a localized string similar to /v2/characters/{0:D}/corporationhistory/.
         /// </summary>
         public static string ESIEmploymentHistory {
             get {

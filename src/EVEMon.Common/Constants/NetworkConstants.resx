@@ -182,7 +182,7 @@
     <comment>600</comment>
   </data>
   <data name="ESICharacterSheet" xml:space="preserve">
-    <value>/v4/characters/{0:D}/</value>
+    <value>/v5/characters/{0:D}/</value>
     <comment>3600</comment>
   </data>
   <data name="ESIStandings" xml:space="preserve">
@@ -547,7 +547,7 @@
     <comment>5</comment>
   </data>
   <data name="ESIEmploymentHistory" xml:space="preserve">
-    <value>/v1/characters/{0:D}/corporationhistory/</value>
+    <value>/v2/characters/{0:D}/corporationhistory/</value>
     <comment>86400</comment>
   </data>
   <data name="BitBucketBase" xml:space="preserve">
