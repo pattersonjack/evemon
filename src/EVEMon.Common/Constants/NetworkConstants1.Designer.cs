@@ -70,7 +70,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://peterhaneve.github.io/evemon-datafiles/.
+        ///   Looks up a localized string similar to https://mgoeppner.github.io/evemon-datafiles/.
         /// </summary>
         public static string BitBucketDatafilesBase {
             get {
@@ -1033,7 +1033,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/peterhaneve/evemon/issues/.
+        ///   Looks up a localized string similar to https://github.com/mgoeppner/evemon/issues/.
         /// </summary>
         public static string EVEMonUserVoice {
             get {
@@ -1069,7 +1069,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://raw.githubusercontent.com/peterhaneve/evemon/main.
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/mgoeppner/evemon/main.
         /// </summary>
         public static string GitHubBase {
             get {
@@ -1078,7 +1078,7 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/peterhaneve/evemon/releases.
+        ///   Looks up a localized string similar to https://github.com/mgoeppner/evemon/releases.
         /// </summary>
         public static string GitHubDownloadsBase {
             get {

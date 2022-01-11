@@ -151,7 +151,7 @@
     <comment>1200</comment>
   </data>
   <data name="EVEMonUserVoice" xml:space="preserve">
-    <value>https://github.com/peterhaneve/evemon/issues/</value>
+    <value>https://github.com/mgoeppner/evemon/issues/</value>
   </data>
   <data name="ESIIndustryJobs" xml:space="preserve">
     <value>/v1/characters/{0:D}/industry/jobs/</value>
@@ -446,10 +446,10 @@
     <value>/loadout/{0}</value>
   </data>
   <data name="GitHubDownloadsBase" xml:space="preserve">
-    <value>https://github.com/peterhaneve/evemon/releases</value>
+    <value>https://github.com/mgoeppner/evemon/releases</value>
   </data>
   <data name="BitBucketDatafilesBase" xml:space="preserve">
-    <value>https://peterhaneve.github.io/evemon-datafiles/</value>
+    <value>https://mgoeppner.github.io/evemon-datafiles/</value>
   </data>
   <data name="BitBucketIssuesBase" xml:space="preserve">
     <value>https://bitbucket.org/EVEMonDevTeam/evemon/issues</value>
@@ -458,7 +458,7 @@
     <value>/eve/Flags.xml</value>
   </data>
   <data name="GitHubBase" xml:space="preserve">
-    <value>https://raw.githubusercontent.com/peterhaneve/evemon/main</value>
+    <value>https://raw.githubusercontent.com/mgoeppner/evemon/main</value>
   </data>
   <data name="EVEMonManual" xml:space="preserve">
     <value>https://evemon.readthedocs.org/</value>
