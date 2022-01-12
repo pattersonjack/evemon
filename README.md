@@ -1,5 +1,5 @@
 [![GPL licensed](https://img.shields.io/badge/license-GPL%20v2-blue.svg)]()
-[![GitHub tag](https://img.shields.io/github/tag/peterhaneve/evemon.svg)]()
+[![GitHub tag](https://img.shields.io/github/tag/mgoeppner/evemon.svg)]()
 
 # **EVEMon** 
 
@@ -9,9 +9,13 @@ For complete info on *How To Contribute* please visit the [wiki](https://bitbuck
 
 **Maintainer of the ESI fork:**
 
+[EVE:InfinitasX](https://github.com/mgoeppner/evemon) (GitHub)
+
+**Previous Maintainer of the ESI fork:**
+
 [EVE:Peter Han](https://github.com/peterhaneve/evemon) (GitHub)
 
-**Owner:** 
+**Original Creator:** 
 
 [EVEMonDevTeam](https://github.com/evemondevteam/) (GitHub)
 
@@ -22,9 +26,3 @@ For complete info on *How To Contribute* please visit the [wiki](https://bitbuck
 **Documentation:** [EVEMon Docs](https://evemon.readthedocs.org/)
 
 **Feedback & Ideas:** [On UserVoice](https://evemon.uservoice.com/)
-
-**Admins:**
-
-[JimiC](https://github.com/JimiC) (GitHub)
-
-[Jimi C](https://bitbucket.org/Desmont_McCallock) (Bitbucket)
