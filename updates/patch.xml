@@ -5,7 +5,7 @@
     <version>4.1.1.4995</version>
     <md5>9bb4eb2619803393f27bc4690c915f4d</md5>
     <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.1</url>
-    <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.1EVEMon-install-4.1.1.exe</autopatchurl>
+    <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.1/EVEMon-install-4.1.1.exe</autopatchurl>
     <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
     <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
     <message><![CDATA[# EVEMon 4.1.1
