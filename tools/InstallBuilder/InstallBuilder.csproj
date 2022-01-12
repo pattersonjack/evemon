@@ -89,7 +89,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName)==Debug exit
-$(TargetPath)</PostBuildEvent>
+
   </PropertyGroup>
 </Project>

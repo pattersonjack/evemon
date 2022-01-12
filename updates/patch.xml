@@ -1,37 +1,14 @@
 ﻿<?xml version="1.0"?>
 <evemon xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <newest>
-    <date>06 November 2020</date>
-    <version>4.0.19.4983</version>
-    <md5>918ea2a2cbeb51ace24989206a8716fa</md5>
-    <url>https://forums.eveonline.com/t/evemon-4-0-19-beta-under-new-ownership-conversion-for-esi/75953</url>
-    <autopatchurl>https://github.com/peterhaneve/evemon/releases/download/4.0.19/EVEMon-install-4.0.19.exe</autopatchurl>
+    <date>17 March 2021</date>
+    <version>4.0.20.4986</version>
+    <md5>76f89e810a199ff0a90aef82571ebfaf</md5>
+    <url>https://forums.eveonline.com/t/evemon-4-0-20-beta-under-new-ownership-conversion-for-esi/75953</url>
+    <autopatchurl>https://github.com/peterhaneve/evemon/releases/download/4.0.20/EVEMon-install-4.0.20.exe</autopatchurl>
     <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
     <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
-    <message><![CDATA[# Release v4.0.19
-
-## New Features
-- Manage Plans window now shows the matching character name in the title bar
-
-## Bug Fixes
-- Auto-Updater now uses the correct URL after GitHub migration of branch names due to the United States Black Lives Matter movement
-- Remove outdated and nonfunctional EVE Gate support
-- Logitech G15 support re-enabled as it apparently is still functional on newer models of keyboards
-
-## Contributors
-- Peter Han
-- NevarrTivianne]]></message>
-  </newest>
-  <releases>
-    <release>
-      <date>17 March 2021</date>
-      <version>4.0.20.4986</version>
-      <md5>76f89e810a199ff0a90aef82571ebfaf</md5>
-      <url>https://forums.eveonline.com/t/evemon-4-0-20-beta-under-new-ownership-conversion-for-esi/75953</url>
-      <autopatchurl>https://github.com/peterhaneve/evemon/releases/download/4.0.20/EVEMon-install-4.0.20.exe</autopatchurl>
-      <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
-      <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
-      <message><![CDATA[# Release v4.0.20
+    <message><![CDATA[# Release v4.0.20
 
 ## New Features
 - Skill injector requirements in the Skill Planner now include an estimate of the cost in the tooltip text
@@ -44,71 +21,88 @@
 ## Contributors
 - Peter Han
 - NevarrTivianne]]></message>
+  </newest>
+  <releases>
+    <release>
+      <date>12 January 2022</date>
+      <version>4.1.1.4995</version>
+      <md5>9bb4eb2619803393f27bc4690c915f4d</md5>
+      <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.1</url>
+      <autopatchurl>https://github.com/mgoeppner/evemon/releases/tag/4.1.1EVEMon-install-4.1.1.exe</autopatchurl>
+      <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
+      <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
+      <message><![CDATA[# EVEMon 4.1.1
+
+# Features
+- Attempt to get the built-in updater working correctly
+
+## Bug Fixes
+- Fixes an issue where the settings file fails to load correctly]]></message>
     </release>
   </releases>
   <datafiles>
     <datafile>
       <name>eve-blueprints-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>df91ac86ac9954dfaff13ab77681a1cc</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) blueprints data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>6c8ca2d10337fbcf42b323606aa1c323</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) blueprints data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-certificates-en-US.xml.gzip</name>
-      <date>05 June 2018</date>
+      <date>11 January 2022</date>
       <md5>540000f7c111354769a54fa31e57d411</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) certificates data file by the EVEMon Development Team
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) certificates data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-geography-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>3077e700023d84a267b744a6ee44acc7</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) geography data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>e4075d02fc59996779c3892ef88e74ab</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) geography data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-items-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>4c9cb667e22421fad8ca08777be7fd8a</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) items data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>bc72b29e8a70a67fb50556c03ef30125</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) items data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-masteries-en-US.xml.gzip</name>
-      <date>05 June 2018</date>
+      <date>12 January 2022</date>
       <md5>3668b50996fc40a0c0853fec427b5712</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) masteries data file by the EVEMon Development Team
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) masteries data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-properties-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>1f6ae9f613fd26b08d5ec206d0958d79</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) properties data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>4aa2d8a5bfbbf8b7dea1e55b25b5ef77</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) properties data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-reprocessing-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>adb83f4fc55f61a58548dcb924a91cfe</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) reprocessing data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>24124961fd2803f1751e6660aa4464b2</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) reprocessing data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-skills-en-US.xml.gzip</name>
-      <date>17 March 2021</date>
-      <md5>727a781211b138cf331afed346692962</md5>
-      <url>https://peterhaneve.github.io/evemon-datafiles/Reign/1885884</url>
-      <message><![CDATA[Reign 1.0 (1885884) skills data file by the EVEMon Development Team
+      <date>12 January 2022</date>
+      <md5>cf16e543356a88033255bf275a8f44fa</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
+      <message><![CDATA[New Dawn 20.01 (1987608) skills data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
   </datafiles>
