@@ -63,8 +63,9 @@ namespace EVEMon.About
                                    { "Nericus Demeeny", 3 },
                                    { "Tonto Auri", 3 },
                                    // Developers
-                                   { "Peter Han", 4 },
+                                   { "InfinitasX", 4 },
                                    // Developers (Retired)
+                                   { "Peter Han", 5 },
                                    { "Collin Grady", 5 },
                                    { "DCShadow", 5 },
                                    { "DonQuiche", 5 },
