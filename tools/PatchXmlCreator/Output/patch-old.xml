@@ -4,8 +4,8 @@
     <date>12 January 2022</date>
     <version>4.1.1.4995</version>
     <md5>9bb4eb2619803393f27bc4690c915f4d</md5>
-    <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.1</url>
-    <autopatchurl>https://github.com/mgoeppner/evemon/releases/tag/4.1.1EVEMon-install-4.1.1.exe</autopatchurl>
+    <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.1/</url>
+    <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.1/EVEMon-install-4.1.1.exe</autopatchurl>
     <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
     <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
     <message><![CDATA[# EVEMon 4.1.1
@@ -18,20 +18,18 @@
   </newest>
   <releases>
     <release>
-      <date>12 January 2022</date>
-      <version>4.1.1.4995</version>
-      <md5>9bb4eb2619803393f27bc4690c915f4d</md5>
-      <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.1</url>
-      <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.1EVEMon-install-4.1.1.exe</autopatchurl>
+      <date>16 January 2022</date>
+      <version>4.1.2.5009</version>
+      <md5>56ff863be8277c913e1706d9f315a020</md5>
+      <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.2/</url>
+      <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.2/EVEMon-install-4.1.2.exe</autopatchurl>
       <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
       <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
-      <message><![CDATA[# EVEMon 4.1.1
-
-# Features
-- Attempt to get the built-in updater working correctly
+      <message><![CDATA[## Features
+- Add CI build via circleci
 
 ## Bug Fixes
-- Fixes an issue where the settings file fails to load correctly]]></message>
+- Update developer listType your message here.]]></message>
     </release>
   </releases>
   <datafiles>
