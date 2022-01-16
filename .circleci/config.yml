@@ -8,17 +8,25 @@ jobs:
     description: Build application with Release configuration
     executor:
       name: windows/default
+    environment:
+      BUILD_CONFIGURATION: Release
     steps:
       - checkout
       - run:
           name: "NuGet"
           command: nuget.exe restore EVEMon.sln
       - run:
-          name: "Build Application according to some given configuration"
-          command: msbuild -t:build -restore -p:BclBuildImported=Ignore  -p:Configuration=Release EVEMon.sln 
+          name: "Build EVEMon Application"
+          command: msbuild -t:build -restore -p:BclBuildImported=Ignore  -p:Configuration=${BUILD_CONFIGURATION} EVEMon.sln 
+      - run:
+          name: "Package EVEMon installer"
+          command: tools\InstallBuilder\bin\${BUILD_CONFIGURATION}\EVEMonInstallBuilder.exe
       - store_artifacts:
           path: src\EVEMon\bin\Installbuilder\Installer\
           destination: Installer
+      - store_artifacts:
+          path: src\EVEMon\bin\Installbuilder\Binaries\
+          destination: Binaries
 workflows:
   test_and_build:
     jobs:
