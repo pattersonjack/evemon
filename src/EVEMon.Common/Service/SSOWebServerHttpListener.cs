@@ -7,7 +7,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace EVEMon.Common.Service
 {
