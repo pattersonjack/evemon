@@ -21,7 +21,7 @@ jobs:
       - run:
           name: "Package EVEMon installer"
           working_directory: ~\project\tools\InstallBuilder\bin\Release
-          command: EVEMonInstallBuilder.exe
+          command: .\EVEMonInstallBuilder.exe
       - store_artifacts:
           path: src\EVEMon\bin\Installbuilder\Installer\
           destination: Installer
