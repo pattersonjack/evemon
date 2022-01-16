@@ -17,10 +17,10 @@ jobs:
           command: nuget.exe restore EVEMon.sln
       - run:
           name: "Build EVEMon Application"
-          command: msbuild -t:build -restore -p:BclBuildImported=Ignore  -p:Configuration=${BUILD_CONFIGURATION} EVEMon.sln 
+          command: msbuild -t:build -restore -p:BclBuildImported=Ignore  -p:Configuration=Release EVEMon.sln 
       - run:
           name: "Package EVEMon installer"
-          command: tools\InstallBuilder\bin\${BUILD_CONFIGURATION}\EVEMonInstallBuilder.exe
+          command: tools\InstallBuilder\bin\Release\EVEMonInstallBuilder.exe
       - store_artifacts:
           path: src\EVEMon\bin\Installbuilder\Installer\
           destination: Installer
