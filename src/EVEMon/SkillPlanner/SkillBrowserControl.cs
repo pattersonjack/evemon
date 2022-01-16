@@ -332,12 +332,6 @@ namespace EVEMon.SkillPlanner
             ownsBookToolStripButton.Checked = m_selectedSkill.IsOwned | (m_selectedSkill.
                 HasBookInAssets && !m_selectedSkill.IsKnown);
 
-            skillSelectControl.UpdateContent();
-
-            // Update also the skill selector of the Plan Editor
-            PlanWindow planWindow = ParentForm as PlanWindow;
-            planWindow?.UpdatePlanEditorSkillSelection();
-
             // Update the Owned Skill books window if open
             if (m_plan != null)
                 WindowsFactory.GetByTag<OwnedSkillBooksWindow, Character>(m_plan.Character as
