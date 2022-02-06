@@ -641,9 +641,11 @@ namespace EVEMon.CharacterMonitoring
                 .AppendLine()
                 .Append($"Skills at Level V: {m_character.GetSkillCountAtLevel(5)}")
                 .AppendLine()
-                .Append($"Total SP: {GetTotalSkillPoints():N0}")
+                .Append($"Allocated SP: {GetTotalSkillPoints():N0}")
                 .AppendLine()
-                .Append($"Free SP: {m_character.FreeSkillPoints:N0}");
+                .Append($"Unallocated SP: {m_character.FreeSkillPoints:N0}")
+                .AppendLine()
+                .Append($"Total SP: {(m_character.FreeSkillPoints + GetTotalSkillPoints()):N0}");
 
             return output.ToString();
         }
