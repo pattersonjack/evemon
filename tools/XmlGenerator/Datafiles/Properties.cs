@@ -94,6 +94,16 @@ namespace EVEMon.XmlGenerator.Datafiles
             };
             s_injectedUnits.Add(perHourUnit);
 
+            // TODO: New unit added in 20.02, remove when SDE conversion is updated
+            EveUnits modifierRealPercentUnit = new EveUnits
+            {
+                ID = 205,
+                Name = "modifier realPercent",
+                DisplayName = "%",
+                Description = "Used for multipliers displayed as % 10 is +10% -10 is -10% 3.6 is +3.6%"
+            };
+            s_injectedUnits.Add(modifierRealPercentUnit);
+
             // Create EVEMon custom properties
             int newPropID = Database.DgmAttributeTypesTable.Last().ID;
             PackagedVolumePropertyID = ++newPropID;

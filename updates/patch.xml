@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0"?>
 <evemon xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <newest>
-    <date>16 January 2022</date>
-    <version>4.1.2.5009</version>
-    <md5>18e671dd10fcb9983a9eb6541e4d2db6</md5>
-    <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.2/</url>
-    <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.2/EVEMon-install-4.1.2.exe</autopatchurl>
+    <date>06 February 2022</date>
+    <version>4.1.3.5017</version>
+    <md5>1ddc4a74b0e26764d922fd0b22939e0b</md5>
+    <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.3/</url>
+    <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.3/EVEMon-install-4.1.3.exe</autopatchurl>
     <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
     <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
     <message><![CDATA[## Features
-- Add CI build via circleci
+- Show total SP, allocated, and unallocated SP on the character sheet (#17) 
 
 ## Bug Fixes
-- Update developer list]]></message>
+- Fix NullReferenceException with owned skill book in skill browser. (thanks @luyi1888)]]></message>
   </newest>
   <releases>
     <release>
@@ -20,7 +20,7 @@
       <version>4.1.3.5017</version>
       <md5>1ddc4a74b0e26764d922fd0b22939e0b</md5>
       <url>https://github.com/mgoeppner/evemon/releases/tag/4.1.3/</url>
-      <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.3/EVEMon-install-4.1.3.exe</autopatchurl>
+      <autopatchurl>https://github.com/mgoeppner/evemon/releases/download/4.1.3/EVEMon-install-4.1.2.exe</autopatchurl>
       <autopatchargs>/S /AUTORUN /SKIPDOTNET</autopatchargs>
       <additionalargs>/D=%EVEMON_EXECUTABLE_PATH%</additionalargs>
       <message><![CDATA[## Features
@@ -33,66 +33,66 @@
   <datafiles>
     <datafile>
       <name>eve-blueprints-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>6c8ca2d10337fbcf42b323606aa1c323</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) blueprints data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>3c54f1c340d5730db6222c9047b2036e</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) blueprints data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-certificates-en-US.xml.gzip</name>
-      <date>11 January 2022</date>
+      <date>18 January 2022</date>
       <md5>540000f7c111354769a54fa31e57d411</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) certificates data file by the EVEMon Development Team
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) certificates data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-geography-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>e4075d02fc59996779c3892ef88e74ab</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) geography data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>957829e60281e4d412a0eef3020aeef9</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) geography data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-items-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>bc72b29e8a70a67fb50556c03ef30125</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) items data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>c882b15c2df49ea677f621bfb38de486</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) items data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-masteries-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
+      <date>18 January 2022</date>
       <md5>3668b50996fc40a0c0853fec427b5712</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) masteries data file by the EVEMon Development Team
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) masteries data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-properties-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>4aa2d8a5bfbbf8b7dea1e55b25b5ef77</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) properties data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>5671f8c66846c6d67ec497dbc09c225c</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) properties data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-reprocessing-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>24124961fd2803f1751e6660aa4464b2</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) reprocessing data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>6ff141b0721b23c0c56f278b0a731d9d</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) reprocessing data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-skills-en-US.xml.gzip</name>
-      <date>12 January 2022</date>
-      <md5>cf16e543356a88033255bf275a8f44fa</md5>
-      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/1987608</url>
-      <message><![CDATA[New Dawn 20.01 (1987608) skills data file by the EVEMon Development Team
+      <date>22 February 2022</date>
+      <md5>88cf040ab53367cf9f7cc2c0aafac90f</md5>
+      <url>https://mgoeppner.github.io/evemon-datafiles/New Dawn/2007022</url>
+      <message><![CDATA[New Dawn 20.02 (2007022) skills data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
   </datafiles>
