@@ -533,8 +533,9 @@ namespace EVEMon.Controls
                     // More than one entry in queue ? Display total queue remaining time
                     if (ccpCharacter.SkillQueue.Count > 1)
                     {
-                        text = "Queue ends in " + ccpCharacter.SkillQueue.EndTime.
-                            ToRemainingTimeShortDescription(DateTimeKind.Utc);
+                        text = string.Format("Queue ends in {0} ({1})", ccpCharacter.SkillQueue.EndTime.
+                            ToRemainingTimeShortDescription(DateTimeKind.Utc),
+                            ccpCharacter.SkillQueue.GetCountInSkillQueueDescription());
                     }
                 }
                 // Skill queue is empty ?

@@ -202,7 +202,8 @@ namespace EVEMon.CharacterMonitoring
 
             // Update the remaining queue time label
             DateTime queueEndTime = ccpCharacter.SkillQueue.EndTime;
-            lblQueueRemaining.Text = queueEndTime.ToRemainingTimeDescription(DateTimeKind.Utc);
+            lblQueueRemaining.Text = string.Format("{0} ({1})", queueEndTime.ToRemainingTimeDescription(DateTimeKind.Utc),
+                ccpCharacter.SkillQueue.GetCountInSkillQueueDescription());
         }
 
         /// <summary>

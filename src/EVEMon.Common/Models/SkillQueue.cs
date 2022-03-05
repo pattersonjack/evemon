@@ -260,6 +260,18 @@ namespace EVEMon.Common.Models
             return  Math.Floor(WarningThresholdTimeSpan.TotalSeconds / totalSeconds * width);
         }
 
+        public string GetCountInSkillQueueDescription()
+        {
+            if (this.Count > 1)
+            {
+                return string.Format("{0} skills", this.Count);
+            }
+            else
+            {
+                return string.Format("{0} skill", this.Count);
+            }
+        }
+
         #endregion
     }
 }
