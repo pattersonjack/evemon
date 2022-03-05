@@ -25,7 +25,7 @@ namespace EVEMon.Common.Serialization.Esi
             {
                 Regex pattern = new Regex(@"^u'(.*)'$");
                 Match match = pattern.Match(value);
-                if(match.Success)
+                if (match.Success)
                 {
                     _ShipName = Regex.Unescape(match.Groups[1].Value);
                 }
