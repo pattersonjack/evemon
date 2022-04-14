@@ -84,7 +84,6 @@ namespace EVEMon.ApiCredentialsManagement
         /// <param name="results"></param>
         private void UpdateTokens(Task<string> results)
         {
-            Console.WriteLine("UpdateTokens Start");
             string code;
             if (results.IsFaulted)
             {
@@ -94,7 +93,6 @@ namespace EVEMon.ApiCredentialsManagement
             }
             else if (!results.IsCanceled && !string.IsNullOrEmpty(code = results.Result))
             {
-                Console.WriteLine(code);
                 // If a token is received, use SSOAuthenticationService to convert to a token
                 // null is returned if the user cancels
                 m_authService.VerifyAuthCode(code, GoToResults);
