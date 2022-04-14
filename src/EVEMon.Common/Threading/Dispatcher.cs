@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using ThreadDispatcher = System.Windows.Threading.Dispatcher;
 
@@ -8,6 +9,8 @@ namespace EVEMon.Common.Threading
     public static class Dispatcher
     {
         private static ThreadDispatcher s_mainThreadDispather;
+        private static TaskScheduler s_mainThreadScheduler;
+        private static TaskFactory s_mainThreadFactory;
         private static DispatcherTimer s_oneSecondTimer;
 
         /// <summary>
@@ -17,12 +20,14 @@ namespace EVEMon.Common.Threading
         /// <remarks>
         /// If the method has already been called previously, this new call will silently fail.
         /// </remarks>
-        internal static void Run(Thread thread)
+        internal static void Run(Thread thread, TaskScheduler scheduler)
         {
-            if (s_mainThreadDispather != null)
+            if (s_mainThreadDispather != null || s_mainThreadScheduler != null)
                 return;
 
             s_mainThreadDispather = ThreadDispatcher.FromThread(thread) ?? ThreadDispatcher.CurrentDispatcher;
+            s_mainThreadScheduler = scheduler;
+            s_mainThreadFactory = new TaskFactory(s_mainThreadScheduler);
 
             s_oneSecondTimer = new DispatcherTimer(TimeSpan.FromSeconds(1),
                 DispatcherPriority.Background,
@@ -50,8 +55,9 @@ namespace EVEMon.Common.Threading
         {
             if (s_mainThreadDispather == null || s_mainThreadDispather.CheckAccess())
                 action.Invoke();
+
             else
-                s_mainThreadDispather.Invoke(action);
+                s_mainThreadFactory.StartNew(action).Wait();                
         }
 
         /// <summary>
@@ -61,6 +67,7 @@ namespace EVEMon.Common.Threading
         /// <param name="action">The action to execute.</param>
         public static void Schedule(TimeSpan time, Action action)
         {
+
             DispatcherTimer timer = new DispatcherTimer { Interval = time };
             timer.Tick += (sender, args) =>
             {
