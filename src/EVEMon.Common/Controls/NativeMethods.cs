@@ -176,6 +176,11 @@ namespace EVEMon.Common.Controls
         /// <returns></returns>
         public static bool VerticalScrollBarVisible(this Control control)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return true;
+
             uint wndStyle = GetWindowLong(control.Handle, GWL_STYLE);
             return (wndStyle & WS_VSCROLL) == WS_VSCROLL;
         }
@@ -187,6 +192,11 @@ namespace EVEMon.Common.Controls
         /// <returns></returns>
         public static bool HorizontalScrollBarVisible(this Control control)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return true;
+
             uint wndStyle = GetWindowLong(control.Handle, GWL_STYLE);
             return (wndStyle & WS_HSCROLL) == WS_HSCROLL;
         }
@@ -204,6 +214,11 @@ namespace EVEMon.Common.Controls
         /// <exception cref="System.ArgumentNullException">control</exception>
         public static int GetVerticalScrollBarPosition(this Control control)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return 0;
+
             control.ThrowIfNull(nameof(control));
 
             Scrollinfo currentInfo = new Scrollinfo();
@@ -222,6 +237,11 @@ namespace EVEMon.Common.Controls
         /// <exception cref="System.ArgumentNullException">control</exception>
         public static void SetVerticalScrollBarPosition(this Control control, int position)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return;
+
             control.ThrowIfNull(nameof(control));
 
             SendMessage(new HandleRef(control, control.Handle), (uint)ListViewMessages.LVM_SCROLL, IntPtr.Zero, (IntPtr)position);
