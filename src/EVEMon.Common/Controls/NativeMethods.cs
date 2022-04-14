@@ -79,6 +79,11 @@ namespace EVEMon.Common.Controls
         /// <param name="locked">true to lock window drawing updates, or false to enable them.</param>
         public static void LockWindowUpdate(this Control form, bool locked)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return;
+
             if (locked)
                 LockWindowUpdate(form.Handle);
             else
@@ -93,6 +98,11 @@ namespace EVEMon.Common.Controls
         /// <exception cref="System.ArgumentNullException">form</exception>
         public static void ShowInactiveTopmost(this Control form, uint uFlags = 0)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return;
+
             form.ThrowIfNull(nameof(form));
 
             // We store the 'left' and 'top' position because for some reason
@@ -115,6 +125,11 @@ namespace EVEMon.Common.Controls
         /// <exception cref="System.ArgumentNullException">dest or graphics</exception>
         public static void CopyGraphics(Graphics dest, Rectangle destClip, Graphics graphics, Point bltFrom)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return;
+
             dest.ThrowIfNull(nameof(dest));
 
             graphics.ThrowIfNull(nameof(graphics));
@@ -134,6 +149,11 @@ namespace EVEMon.Common.Controls
         /// <exception cref="System.ArgumentNullException">graphics</exception>
         public static void SetTextCharacterSpacing(Graphics graphics, int spacing)
         {
+            // No op on non-windows
+            int platform = (int)Environment.OSVersion.Platform;
+            if (platform == 4 || platform == 6 || platform == 128)
+                return;
+
             graphics.ThrowIfNull(nameof(graphics));
 
             IntPtr hdc = graphics.GetHdc();
