@@ -37,9 +37,14 @@ namespace EVEMon.Common.Models
         public long ImplantBonus => m_character.CurrentImplants[m_attrib].Bonus;
 
         /// <summary>
+        /// Gets the bonus applied from cerebral accelerators
+        /// </summary>
+        public long BoosterBonus { get; internal set; }
+
+        /// <summary>
         /// Gets the effective attribute value.
         /// </summary>
-        public long EffectiveValue => Base + ImplantBonus;
+        public long EffectiveValue => Base + ImplantBonus + BoosterBonus;
 
         /// <summary>
         /// Gets a string representation with the provided format. The following parameters are accepted :

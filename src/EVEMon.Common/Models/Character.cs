@@ -142,7 +142,7 @@ namespace EVEMon.Common.Models
                     }
                 }
             }
-            
+
             CharacterStatus = status;
         }
 
@@ -457,6 +457,16 @@ namespace EVEMon.Common.Models
         /// <param name="attribute">The attribute to retrieve.</param>
         /// <returns></returns>
         protected override ICharacterAttribute GetAttribute(EveAttribute attribute) => m_attributes[(int)attribute];
+
+        /// <summary>
+        /// Gets the amount of any active attribute booster 
+        /// </summary>
+        protected int GetAttributeBoosterAmount(long intelligence, long perception, long willpower, long charisma, long memory)
+        {
+            IEnumerable<long> attributes = new List<long> { intelligence, perception, willpower, charisma, memory };
+
+            return (attributes.Cast<int>().Sum() - ((EveConstants.CharacterBaseAttributePoints * 5) + EveConstants.SpareAttributePointsOnRemap)) / 5;
+        }
 
         #endregion
 
@@ -852,22 +862,31 @@ namespace EVEMon.Common.Models
             AvailableReMaps = attribs.BonusRemaps;
             LastReMapDate = attribs.LastRemap;
 
-            SetAttribute(EveAttribute.Intelligence, attribs.Intelligence);
-            SetAttribute(EveAttribute.Perception, attribs.Perception);
-            SetAttribute(EveAttribute.Willpower, attribs.Willpower);
-            SetAttribute(EveAttribute.Charisma, attribs.Charisma);
-            SetAttribute(EveAttribute.Memory, attribs.Memory);
+            // calculate if a booster is in use
+            var boosterBonus = GetAttributeBoosterAmount(
+                attribs.Intelligence,
+                attribs.Perception,
+                attribs.Willpower,
+                attribs.Charisma,
+                attribs.Memory);
+
+            SetAttribute(EveAttribute.Intelligence, attribs.Intelligence, boosterBonus);
+            SetAttribute(EveAttribute.Perception, attribs.Perception, boosterBonus);
+            SetAttribute(EveAttribute.Willpower, attribs.Willpower, boosterBonus);
+            SetAttribute(EveAttribute.Charisma, attribs.Charisma, boosterBonus);
+            SetAttribute(EveAttribute.Memory, attribs.Memory, boosterBonus);
         }
 
         /// <summary>
-        /// Attributes include current implants! Therefore, subtract the information
-        /// about current implants since those were fetched with Implants beforehand.
+        /// Attributes include current implants and boosters! Therefore, subtract the information
+        /// about current implants and boosters since those were fetched with Implants beforehand.
         /// </summary>
         /// <param name="attribute">The attribute to set.</param>
         /// <param name="value">The value reported by Attributes ESI call.</param>
-        private void SetAttribute(EveAttribute attribute, int value)
+        private void SetAttribute(EveAttribute attribute, int value, int boosterBonus)
         {
-            m_attributes[(int)attribute].Base = value - CurrentImplants[attribute]?.Bonus ?? 0;
+            m_attributes[(int)attribute].Base = value - (CurrentImplants[attribute]?.Bonus ?? 0) - boosterBonus;
+            m_attributes[(int)attribute].BoosterBonus = boosterBonus;
         }
 
         /// <summary>
