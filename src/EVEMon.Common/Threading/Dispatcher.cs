@@ -11,7 +11,8 @@ namespace EVEMon.Common.Threading
         private static ThreadDispatcher s_mainThreadDispather;
         private static TaskScheduler s_mainThreadScheduler;
         private static TaskFactory s_mainThreadFactory;
-        private static DispatcherTimer s_oneSecondTimer;
+
+        private static Timer s_oneSecondTimer;
 
         /// <summary>
         /// Starts the dispatcher on the main thread.
@@ -29,10 +30,8 @@ namespace EVEMon.Common.Threading
             s_mainThreadScheduler = scheduler;
             s_mainThreadFactory = new TaskFactory(s_mainThreadScheduler);
 
-            s_oneSecondTimer = new DispatcherTimer(TimeSpan.FromSeconds(1),
-                DispatcherPriority.Background,
-                OneSecondTickTimer_Tick,
-                s_mainThreadDispather);
+            var e = new AutoResetEvent(false);
+            s_oneSecondTimer = new Timer(OneSecondTickTimer_Tick, e, 0, 1000);
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace EVEMon.Common.Threading
             if (s_oneSecondTimer == null)
                 return;
 
-            s_oneSecondTimer.Stop();
+            s_oneSecondTimer.Dispose();
             s_oneSecondTimer = null;
         }
 
@@ -80,7 +79,13 @@ namespace EVEMon.Common.Threading
         /// <summary>
         /// Occurs on every second, when the timer ticks.
         /// </summary>
+        //
         private static void OneSecondTickTimer_Tick(object sender, EventArgs e)
+        {
+            EveMonClient.UpdateOnOneSecondTick();
+        }
+
+        private static void OneSecondTickTimer_Tick(object sender)
         {
             EveMonClient.UpdateOnOneSecondTick();
         }
