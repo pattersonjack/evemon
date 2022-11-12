@@ -41,8 +41,8 @@
   <datafiles>
     <datafile>
       <name>eve-blueprints-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>410280ee6121f561ac7f09354972ce38</md5>
+      <date>12 November 2022</date>
+      <md5>75d32177171a550e1b268514f7506b35</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) blueprints data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -57,16 +57,16 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-geography-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>957829e60281e4d412a0eef3020aeef9</md5>
+      <date>12 November 2022</date>
+      <md5>26e0fb4abc67d508c78d68ff80dc286e</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) geography data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-items-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>a551e809290c88c634953b1c713daa1b</md5>
+      <date>12 November 2022</date>
+      <md5>24aaf0e9708b8034be89415ebac1bdd9</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) items data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -81,24 +81,24 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-properties-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>2b61fbc476da11385fc1ab2f058d91e8</md5>
+      <date>12 November 2022</date>
+      <md5>3e0d7f712f8a4567047450b1882e498a</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) properties data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-reprocessing-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>8d9835c8b474942685888927396f4b7a</md5>
+      <date>12 November 2022</date>
+      <md5>82e24f4699edeb85bbe8160dd5646760</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) reprocessing data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     </datafile>
     <datafile>
       <name>eve-skills-en-US.xml.gzip</name>
-      <date>14 April 2022</date>
-      <md5>0a84e91dcbece4b0d8d1e56f2619f5c5</md5>
+      <date>12 November 2022</date>
+      <md5>8e17b179c6a95bf79a6fc7b19f260014</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Uprising/2156070</url>
       <message><![CDATA[Uprising 20.10 (2156070) skills data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
