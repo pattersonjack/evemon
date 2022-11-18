@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using EVEMon.Common.CustomEventArgs;

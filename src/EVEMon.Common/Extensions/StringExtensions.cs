@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using EVEMon.Common.Constants;
 
 namespace EVEMon.Common.Extensions
