@@ -281,7 +281,7 @@
     <EmbeddedResource Remove="SkillPlanner\SuggestionWindow.resx" />
   </ItemGroup>
   <PropertyGroup>
-    <PreBuildEvent>cd $(SolutionDir)tools\ResFileCreator\$(OutDir)
+    <PreBuildEvent>cd $(SolutionDir)tools\ResFileCreator\bin\Debug
 EVEMonResFileCreator.exe</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

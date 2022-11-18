@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Web;
 using EVEMon.Common.CustomEventArgs;
 using EVEMon.Common.Extensions;
 using EVEMon.Common.Helpers;
