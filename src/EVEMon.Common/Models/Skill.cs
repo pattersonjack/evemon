@@ -295,6 +295,11 @@ namespace EVEMon.Common.Models
         /// </summary>
         public int SkillPointsPerHour => (int)Math.Round(Character?.GetBaseSPPerHour(this) ?? 0);
 
+        /// <summary>
+        /// Gets the training speed without boosters.
+        /// </summary>
+        public int SkillPointsPerHourWithoutBoosters => (int)Math.Round(Character?.GetBaseSPPerHourWithoutBoosters(this) ?? 0);
+
         #endregion
 
 

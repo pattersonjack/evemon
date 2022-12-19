@@ -154,6 +154,7 @@ namespace EVEMon.CharacterMonitoring
             DateTime completionTime = training.EndTime.ToLocalTime();
 
             lblTrainingSkill.Text = training.ToString();
+
             lblSPPerHour.Text = training.Skill == null
                 ? "???"
                 : $"{training.SkillPointsPerHour} SP/Hour";
@@ -165,6 +166,12 @@ namespace EVEMon.CharacterMonitoring
             bool isAutoBlocking;
             bool isBlocking = Scheduler.SkillIsBlockedAt(training.EndTime.ToLocalTime(), out conflictMessage, out isAutoBlocking);
             CCPCharacter ccpCharacter = m_character as CCPCharacter;
+
+            TimeSpan booster = ccpCharacter.SkillQueue.BoosterDuration;
+            if (booster.TotalSeconds > 0)
+            {
+                lblSPPerHour.Text += string.Format(", Booster Remaining: ~{0} hours", (int)booster.TotalHours);
+            }
 
             // Do not show the "DOWNTIME" warning if character's skill queue has more than one skills
             if (ccpCharacter != null && ccpCharacter.SkillQueue.Count > 1 &&
@@ -202,6 +209,7 @@ namespace EVEMon.CharacterMonitoring
 
             // Update the remaining queue time label
             DateTime queueEndTime = ccpCharacter.SkillQueue.EndTime;
+
             lblQueueRemaining.Text = string.Format("{0} ({1})", queueEndTime.ToRemainingTimeDescription(DateTimeKind.Utc),
                 ccpCharacter.SkillQueue.GetCountInSkillQueueDescription());
         }
