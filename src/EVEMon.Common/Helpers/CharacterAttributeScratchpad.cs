@@ -113,6 +113,7 @@ namespace EVEMon.Common.Helpers
         /// <item>%i for implant bonus</item>
         /// <item>%r for remapping points</item>
         /// <item>%e for effective value</item>
+        /// <item>%x for booster bonus</item>
         /// </list>
         /// </summary>
         /// <returns>The formatted string.</returns>
@@ -128,6 +129,7 @@ namespace EVEMon.Common.Helpers
             format = format.Replace("%i", ImplantBonus.ToString(CultureConstants.DefaultCulture));
             format = format.Replace("%r", (m_base - EveConstants.CharacterBaseAttributePoints).ToString(CultureConstants.DefaultCulture));
             format = format.Replace("%e", EffectiveValue.ToString("0", CultureConstants.DefaultCulture));
+            format = format.Replace("%x", BoosterBonus.ToString(CultureConstants.DefaultCulture));
             return format;
         }
 

@@ -48,7 +48,7 @@ namespace EVEMon.Common.Models
 
         /// <summary>
         /// Gets a string representation with the provided format. The following parameters are accepted :
-        /// <list type="bullet"><item>%n for name (lower case)</item><item>%N for name (CamelCase)</item><item>%B for attribute base value</item><item>%b for base bonus</item><item>%i for implant bonus</item><item>%r for remapping points</item><item>%e for effective value</item></list>
+        /// <list type="bullet"><item>%n for name (lower case)</item><item>%N for name (CamelCase)</item><item>%B for attribute base value</item><item>%b for base bonus</item><item>%i for implant bonus</item><item>%r for remapping points</item><item>%e for effective value</item><item>%x for booster bonus</item></list>
         /// </summary>
         /// <param name="format">The format.</param>
         /// <returns>
@@ -67,6 +67,7 @@ namespace EVEMon.Common.Models
             format = format.Replace("%r",
                 (Base - EveConstants.CharacterBaseAttributePoints).ToString(CultureConstants.DefaultCulture));
             format = format.Replace("%e", EffectiveValue.ToString("0", CultureConstants.DefaultCulture));
+            format = format.Replace("%x", BoosterBonus.ToString(CultureConstants.DefaultCulture));
             return format;
         }
 
