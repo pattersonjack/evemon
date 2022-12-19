@@ -727,9 +727,11 @@ namespace EVEMon.Common.Models
             serial.Attributes.Charisma = Charisma.Base;
             serial.Attributes.Memory = Memory.Base;
 
+            serial.Attributes.Booster = Intelligence.BoosterBonus;
+
             // Implants sets
             serial.ImplantSets = ImplantSets.Export();
-
+            
             // Skills
             serial.Skills.AddRange(Skills.Export());
         }
@@ -1048,6 +1050,12 @@ namespace EVEMon.Common.Models
             m_attributes[(int)EveAttribute.Willpower].Base = serial.Attributes.Willpower;
             m_attributes[(int)EveAttribute.Charisma].Base = serial.Attributes.Charisma;
             m_attributes[(int)EveAttribute.Memory].Base = serial.Attributes.Memory;
+
+            m_attributes[(int)EveAttribute.Intelligence].BoosterBonus = serial.Attributes.Booster;
+            m_attributes[(int)EveAttribute.Perception].BoosterBonus = serial.Attributes.Booster;
+            m_attributes[(int)EveAttribute.Willpower].BoosterBonus = serial.Attributes.Booster;
+            m_attributes[(int)EveAttribute.Charisma].BoosterBonus = serial.Attributes.Booster;
+            m_attributes[(int)EveAttribute.Memory].BoosterBonus = serial.Attributes.Booster;
 
             // Skills
             Skills.Import(serial.Skills, serial is SerializableAPICharacterSheet);
