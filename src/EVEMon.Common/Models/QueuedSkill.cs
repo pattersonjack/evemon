@@ -120,8 +120,7 @@ namespace EVEMon.Common.Models
         {
             get
             {
-                int estimatedSP = (int)(EndSP - EndTime.Subtract(DateTime.UtcNow).TotalHours *
-                    SkillPointsPerHour);
+                var estimatedSP = (int)(StartSP + (DateTime.UtcNow.Subtract(StartTime).TotalHours * SkillPointsPerHour));
                 return IsTraining ? Math.Max(estimatedSP, StartSP) : StartSP;
             }
         }
