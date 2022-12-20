@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using EVEMon.Common;
 using EVEMon.Common.Constants;
@@ -170,7 +171,7 @@ namespace EVEMon.CharacterMonitoring
             TimeSpan booster = ccpCharacter.SkillQueue.BoosterDuration;
             if (booster.TotalSeconds > 0)
             {
-                lblSPPerHour.Text += string.Format(", Booster Remaining: ~{0} hours", (int)booster.TotalHours);
+                lblSPPerHour.Text += string.Format(", Booster: ~{0}:{1}", (int)booster.TotalHours, booster.ToString("mm"));
             }
 
             // Do not show the "DOWNTIME" warning if character's skill queue has more than one skills

@@ -65,7 +65,7 @@ namespace EVEMon.Common.Models
         /// Gets the expected booster duration
         /// </summary>
         public TimeSpan BoosterDuration => !Items.Any() ? TimeSpan.Zero : TimeSpan.FromHours(Items.Select(i => {
-            var actualTime = i.EndTime.Subtract(i.StartTime);
+            var actualTime = i.RemainingTime;
 
             var expectedTime = m_character.GetTimeSpanForPointsWithoutBoosters(i.Skill.StaticData, i.Level);
             expectedTime = expectedTime.Subtract(TimeSpan.FromMilliseconds(expectedTime.Milliseconds));
