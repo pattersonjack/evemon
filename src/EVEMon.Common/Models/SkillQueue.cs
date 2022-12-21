@@ -80,7 +80,14 @@ namespace EVEMon.Common.Models
                 var remainingSP = i.EndSP - i.CurrentSP;
                 var expectedSPInActualTime = Math.Round(actualTime.TotalHours * expectedSPRate);
 
-                var boosterHours = (remainingSP - expectedSPInActualTime) / (actualSPRate - expectedSPRate);
+                var spRateDiff = actualSPRate - expectedSPRate;
+
+                if (spRateDiff <= 0)
+                {
+                    return TimeSpan.Zero.TotalHours;
+                }
+
+                var boosterHours = (remainingSP - expectedSPInActualTime) / spRateDiff;
 
                 return boosterHours;
             }
