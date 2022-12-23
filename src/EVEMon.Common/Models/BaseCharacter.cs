@@ -368,7 +368,7 @@ namespace EVEMon.Common.Models
         /// <param name="sp"></param>
         /// <param name="spPerHour"></param>
         /// <returns></returns>
-        private static TimeSpan GetTrainingTime(long sp, float spPerHour)
+        internal static TimeSpan GetTrainingTime(long sp, float spPerHour)
             => Math.Abs(spPerHour) < float.Epsilon ? TimeSpan.FromDays(999.0) : TimeSpan.FromHours(sp / spPerHour);
 
         /// <summary>
