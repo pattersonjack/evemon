@@ -383,7 +383,7 @@ namespace EVEMon.Controls
                 m_hasSkillQueueTrainingTime = false;
             }
 
-            var boosterDuration = ccpCharacter.SkillQueue.BoosterDuration;
+            var boosterDuration = ccpCharacter?.SkillQueue.BoosterDuration ?? TimeSpan.Zero;
 
             if (boosterDuration > TimeSpan.Zero)
             {
