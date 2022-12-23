@@ -65,20 +65,20 @@ namespace EVEMon.Common.Models
         /// Gets the expected booster duration
         /// </summary>
         public TimeSpan BoosterDuration => !Items.Any() ? TimeSpan.Zero : TimeSpan.FromHours(Items.Select(i => {
-            var actualTime = i.RemainingTime;
+            var remainingTime = i.RemainingTime;
+            var queueTime = i.EndTime - i.StartTime;
 
             var expectedTime = m_character.GetTimeSpanForPointsWithoutBoosters(i.Skill.StaticData, i.Level);
-            expectedTime = expectedTime.Subtract(TimeSpan.FromMilliseconds(expectedTime.Milliseconds));
 
             var actualSPRate = m_character.GetBaseSPPerHour(i.Skill.StaticData);
             var expectedSPRate = m_character.GetBaseSPPerHourWithoutBoosters(i.Skill.StaticData);
 
-            if (expectedTime.Subtract(actualTime).TotalSeconds > 1)
+            if (expectedTime > remainingTime || !i.IsTraining && (expectedTime > queueTime))
             {
                 // Booster detected!
-
                 var remainingSP = i.EndSP - i.CurrentSP;
-                var expectedSPInActualTime = Math.Round(actualTime.TotalHours * expectedSPRate);
+                var expectedSPInActualTime = i.IsTraining ? 
+                    Math.Round(remainingTime.TotalHours * expectedSPRate) : Math.Round(queueTime.TotalHours * expectedSPRate);
 
                 var spRateDiff = actualSPRate - expectedSPRate;
 
