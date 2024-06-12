@@ -30,7 +30,7 @@
     <datafile>
       <name>eve-blueprints-en-US.xml.gzip</name>
       <date>12 March 2024</date>
-      <md5>4285b6221590a724bfe6738dc9d8d28d</md5>
+      <md5>01db0730bff2a72e83e2ac76927a1190</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Havoc/2516137</url>
       <message><![CDATA[Havoc 21.06 (2516137) blueprints data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -46,7 +46,7 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     <datafile>
       <name>eve-geography-en-US.xml.gzip</name>
       <date>12 March 2024</date>
-      <md5>c076080a9c3b23b64a47871b424032c6</md5>
+      <md5>2d6e94aa41513053b313319d2d8757d3</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Havoc/2516137</url>
       <message><![CDATA[Havoc 21.06 (2516137) geography data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -54,7 +54,7 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     <datafile>
       <name>eve-items-en-US.xml.gzip</name>
       <date>12 March 2024</date>
-      <md5>97a2204565d3d646d5c41f4f7ed2743c</md5>
+      <md5>53fc381aae9d387de2d38cb36932d2b0</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Havoc/2516137</url>
       <message><![CDATA[Havoc 21.06 (2516137) items data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -70,7 +70,7 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     <datafile>
       <name>eve-properties-en-US.xml.gzip</name>
       <date>12 March 2024</date>
-      <md5>063a8f19917c3a20bd535fa85280d442</md5>
+      <md5>cc91c5a6194f70aeae4847d7d6260a19</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Havoc/2516137</url>
       <message><![CDATA[Havoc 21.06 (2516137) properties data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
@@ -78,7 +78,7 @@ NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
     <datafile>
       <name>eve-reprocessing-en-US.xml.gzip</name>
       <date>12 March 2024</date>
-      <md5>acefb6908f1480ad4b879d0513cf0bfc</md5>
+      <md5>68d40ed14edd41402a5382369c93aef6</md5>
       <url>https://mgoeppner.github.io/evemon-datafiles/Havoc/2516137</url>
       <message><![CDATA[Havoc 21.06 (2516137) reprocessing data file by the EVEMon Development Team
 NOT COMPATIBLE with EVEMon prior to version 2.2.0]]></message>
