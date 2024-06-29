@@ -242,7 +242,6 @@
     <Compile Include="Serialization\Eve\SerializableLocation.cs" />
     <Compile Include="Serialization\Fuzzworks\SerializableFuzzworksPriceItem.cs" />
     <Compile Include="Serialization\Fuzzworks\SerializableFuzzworksPriceListItem.cs" />
-    <Compile Include="Serialization\Hammertime\HammertimeStructure.cs" />
     <Compile Include="Serialization\JsonResult.cs" />
     <Compile Include="Serialization\Esi\EsiResult.cs" />
     <Compile Include="Serialization\Esi\EsiAPIError.cs" />

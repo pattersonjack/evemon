@@ -1114,15 +1114,6 @@ namespace EVEMon.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://stop.hammerti.me.uk/api/citadel/{0:D}.
-        /// </summary>
-        public static string HammertimeCitadel {
-            get {
-                return ResourceManager.GetString("HammertimeCitadel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to /bitmaps/character/level.
         /// </summary>
         public static string MyEVELevelImage {
