@@ -159,9 +159,6 @@ namespace EVEMon.SettingsUI
             // Tray icon settings
             SetTrayIconSettings();
 
-            // G15
-            SetG15Settings();
-
             // Skills display on the main window
             var mws = m_settings.UI.MainWindow;
             cbShowAllPublicSkills.Checked = mws.ShowAllPublicSkills;
@@ -312,21 +309,6 @@ namespace EVEMon.SettingsUI
                     rbExitEVEMon.Checked = true;
                     break;
             }
-        }
-
-        /// <summary>
-        /// Sets the G15 settings.
-        /// </summary>
-        private void SetG15Settings()
-        {
-            g15CheckBox.Checked = m_settings.G15.Enabled;
-            cbG15ACycle.Checked = m_settings.G15.UseCharactersCycle;
-            ACycleInterval.Value = m_settings.G15.CharactersCycleInterval;
-            cbG15CycleTimes.Checked = m_settings.G15.UseTimeFormatsCycle;
-            ACycleTimesInterval.Value = Math.Min(m_settings.G15.TimeFormatsCycleInterval,
-                ACycleTimesInterval.Maximum);
-            cbG15ShowTime.Checked = m_settings.G15.ShowSystemTime;
-            cbG15ShowEVETime.Checked = m_settings.G15.ShowEVETime;
         }
 
         /// <summary>
@@ -506,15 +488,6 @@ namespace EVEMon.SettingsUI
             mws.HighlightQueuedSkills = cbColorQueuedSkills.Checked;
             mws.AlwaysShowSkillQueueTime = cbAlwaysShowSkillQueueTime.Checked;
             mws.SkillQueueWarningThresholdDays = (int)nudSkillQueueWarningThresholdDays.Value;
-
-            // G15
-            m_settings.G15.Enabled = g15CheckBox.Checked;
-            m_settings.G15.UseCharactersCycle = cbG15ACycle.Checked;
-            m_settings.G15.CharactersCycleInterval = (int)ACycleInterval.Value;
-            m_settings.G15.UseTimeFormatsCycle = cbG15CycleTimes.Checked;
-            m_settings.G15.TimeFormatsCycleInterval = (int)ACycleTimesInterval.Value;
-            m_settings.G15.ShowSystemTime = cbG15ShowTime.Checked;
-            m_settings.G15.ShowEVETime = cbG15ShowEVETime.Checked;
 
             // Notifications
             m_settings.Notifications.PlaySoundOnSkillCompletion = cbPlaySoundOnSkillComplete.Checked;
@@ -717,9 +690,6 @@ namespace EVEMon.SettingsUI
         private void UpdateDisables()
         {
             var mws = m_settings.UI.MainWindow;
-            g15Panel.Enabled = g15CheckBox.Checked;
-            ACycleInterval.Enabled = cbG15ACycle.Checked;
-            ACycleTimesInterval.Enabled = cbG15CycleTimes.Checked;
             trayIconPopupGroupBox.Enabled = !rbSystemTrayOptionsNever.Checked;
             emailNotificationsControl.Enabled = mailNotificationCheckBox.Checked;
             customProxyPanel.Enabled = customProxyCheckBox.Checked;
@@ -993,24 +963,6 @@ namespace EVEMon.SettingsUI
         {
             multiPanel.SelectedPage = multiPanel.Controls.Cast<MultiPanelPage>().FirstOrDefault(
                 page => page.Name == (string)e.Node.Tag);
-        }
-
-        /// <summary>
-        /// Sets the character info max cycle time.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ACycleInterval_ValueChanged(object sender, EventArgs e)
-        {
-            if (ACycleInterval.Value == 1)
-            {
-                cbG15CycleTimes.Checked = false;
-                panelCycleQueueInfo.Enabled = false;
-                return;
-            }
-
-            ACycleTimesInterval.Maximum = Math.Max(ACycleInterval.Value / 2, 1);
-            panelCycleQueueInfo.Enabled = true;
         }
 
         /// <summary>

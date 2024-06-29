@@ -1143,7 +1143,6 @@
     <Compile Include="SettingsObjects\PlanSorting.cs" />
     <Compile Include="SettingsObjects\ProxySettings.cs" />
     <Compile Include="SettingsObjects\SchedulerUISettings.cs" />
-    <Compile Include="SettingsObjects\G15Settings.cs" />
     <Compile Include="SettingsObjects\MainWindowSettings.cs" />
     <Compile Include="SettingsObjects\NotificationSettings.cs" />
     <Compile Include="SettingsObjects\SchedulerSettings.cs" />
