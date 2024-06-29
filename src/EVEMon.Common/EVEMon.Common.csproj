@@ -471,7 +471,6 @@
     <Compile Include="Serialization\FittingClf\SerializableClfFittingShipType.cs" />
     <Compile Include="Serialization\Osmium\Loadout\SerializableOsmiumLoadoutAuthor.cs" />
     <Compile Include="Serialization\Osmium\Loadout\SerializableOsmiumLoadoutFeed.cs" />
-    <Compile Include="MarketPricer\EveMarketer\EMItemPricer.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Data\Certificate.cs" />
     <Compile Include="Data\CertificateLevel.cs" />
@@ -1309,7 +1308,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MarketPricer\EveMarketer\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\callback_ok.htm" />
     <None Include="Resources\callback_fail.htm" />
