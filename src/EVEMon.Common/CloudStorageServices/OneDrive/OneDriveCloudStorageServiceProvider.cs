@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using EVEMon.Common.Constants;
 using EVEMon.Common.Serialization;
 using Microsoft.OneDrive.Sdk;
-using Microsoft.OneDrive.Sdk.WindowsForms;
+using Microsoft.OneDrive.Sdk.Authentication;
 using Image = System.Drawing.Image;
 
 namespace EVEMon.Common.CloudStorageServices.OneDrive
@@ -23,6 +23,7 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
 
         private string m_fileId;
 
+        private static OneDriveClient m_client;
 
         #region Properties
 
@@ -123,10 +124,6 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
                 // Settings save is done on caller method
                 return await CheckAuthAsync().ConfigureAwait(false);
             }
-            catch (OneDriveException exc)
-            {
-                m_result.Error = new SerializableAPIError { ErrorMessage = exc.Error.Message };
-            }
             catch (Exception exc)
             {
                 m_result.Error = new SerializableAPIError { ErrorMessage = exc.Message };
@@ -153,13 +150,6 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
                 // Settings save is done on called method
                 return await CheckAuthAsync(saveOnChangeCheck: true).ConfigureAwait(false);
             }
-            catch (OneDriveException exc)
-            {
-                m_result.Error = new SerializableAPIError { ErrorMessage = exc.Error.Message };
-
-                if (exc.Error.Code == OneDriveErrorCode.AuthenticationFailure.ToString() && HasCredentialsStored)
-                    await ResetSettingsAsync().ConfigureAwait(false);
-            }
             catch (Exception exc)
             {
                 m_result.Error = new SerializableAPIError { ErrorMessage = exc.Message };
@@ -178,23 +168,25 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
 
             try
             {
-                using (OneDriveClient client = (OneDriveClient)await GetClient().ConfigureAwait(false))
-                {
-                    bool cansignout = client.AuthenticationProvider.CurrentAccountSession.CanSignOut;
+                var client = await GetClient().ConfigureAwait(false);
 
-                    if (cansignout)
-                        await client.AuthenticationProvider.SignOutAsync().ConfigureAwait(false);
-                    else
-                        m_result.Error = new SerializableAPIError { ErrorMessage = "Unable to revoke authorization" };
-                }
-            }
-            catch (OneDriveException exc)
-            {
-                m_result.Error = new SerializableAPIError { ErrorMessage = exc.Error.Message };
+                var authenticationProvider =
+                    (MsaAuthenticationProvider)client.AuthenticationProvider;
+
+                bool cansignout = authenticationProvider.IsAuthenticated;
+
+                if (cansignout)
+                    await authenticationProvider.SignOutAsync().ConfigureAwait(false);
+                else
+                    m_result.Error = new SerializableAPIError { ErrorMessage = "Unable to revoke authorization" };
             }
             catch (Exception exc)
             {
                 m_result.Error = new SerializableAPIError { ErrorMessage = exc.Message };
+            }
+            finally
+            {
+                m_client = null;
             }
 
             return m_result;
@@ -214,7 +206,8 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
 
                 byte[] content = Util.GZipCompress(SettingsFileContentByteArray).ToArray();
 
-                using (OneDriveClient client = (OneDriveClient)await GetClient().ConfigureAwait(false))
+                var client = await GetClient().ConfigureAwait(false);
+
                 using (Stream stream = Util.GetMemoryStream(content))
                 {
                     Item response = await (string.IsNullOrWhiteSpace(m_fileId)
@@ -225,13 +218,6 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
 
                     m_fileId = response?.Id;
                 }
-            }
-            catch (OneDriveException exc)
-            {
-                if (exc.Error.Code == OneDriveErrorCode.AuthenticationFailure.ToString())
-                    IsAuthenticated = false;
-
-                result.Error = new SerializableAPIError { ErrorMessage = exc.Error.Message };
             }
             catch (Exception exc)
             {
@@ -257,18 +243,11 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
                 if (string.IsNullOrWhiteSpace(m_fileId))
                     throw new FileNotFoundException();
 
-                using (OneDriveClient client = (OneDriveClient)await GetClient().ConfigureAwait(false))
-                {
-                    Stream stream = await client.Drive.Items[m_fileId].Content.Request().GetAsync().ConfigureAwait(false);
-                    return await GetMappedAPIFileAsync(result, stream);
-                }
-            }
-            catch (OneDriveException exc)
-            {
-                if (exc.Error.Code == OneDriveErrorCode.AuthenticationFailure.ToString())
-                    IsAuthenticated = false;
-
-                result.Error = new SerializableAPIError { ErrorMessage = exc.Error.Message };
+                var client = await GetClient().ConfigureAwait(false);
+                
+                Stream stream = await client.Drive.Items[m_fileId].Content.Request().GetAsync().ConfigureAwait(false);
+                return await GetMappedAPIFileAsync(result, stream);
+                
             }
             catch (Exception exc)
             {
@@ -293,32 +272,31 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
             SerializableAPIResult<SerializableAPICredentials> result =
                 new SerializableAPIResult<SerializableAPICredentials>();
 
-            using (OneDriveClient client = (OneDriveClient)await GetClient())
+            var client = await GetClient().ConfigureAwait(false);
+
+            var authenticationProvider =
+                (MsaAuthenticationProvider)client.AuthenticationProvider;
+
+            if (!authenticationProvider.IsAuthenticated)
             {
-                if (!client.IsAuthenticated)
-                {
-                    result.Error = new SerializableAPIError { ErrorMessage = "The client could not be authenticated" };
-                    return result;
-                }
-
-                AuthenticationProvider authenticationProvider =
-                    (MicrosoftAccountAuthenticationProvider)client.AuthenticationProvider;
-
-                if (authenticationProvider.CurrentAccountSession.RefreshToken ==
-                    OneDriveCloudStorageServiceSettings.Default.RefreshToken)
-                {
-                    return result;
-                }
-
-                OneDriveCloudStorageServiceSettings.Default.Credentials =
-                    Encoding.Default.GetString(authenticationProvider.ServiceInfo.CredentialCache.GetCacheBlob());
-                OneDriveCloudStorageServiceSettings.Default.UserId = authenticationProvider.CurrentAccountSession.UserId;
-                OneDriveCloudStorageServiceSettings.Default.RefreshToken =
-                    authenticationProvider.CurrentAccountSession.RefreshToken;
-
-                if (saveOnChangeCheck)
-                    Settings.Save();
+                result.Error = new SerializableAPIError { ErrorMessage = "The client could not be authenticated" };
+                return result;
             }
+
+            if (authenticationProvider.CurrentAccountSession.RefreshToken ==
+                OneDriveCloudStorageServiceSettings.Default.RefreshToken)
+            {
+                return result;
+            }
+
+            OneDriveCloudStorageServiceSettings.Default.Credentials =
+                Encoding.Default.GetString(authenticationProvider.CredentialCache.GetCacheBlob());
+            OneDriveCloudStorageServiceSettings.Default.UserId = authenticationProvider.CurrentAccountSession.UserId;
+            OneDriveCloudStorageServiceSettings.Default.RefreshToken =
+                authenticationProvider.CurrentAccountSession.RefreshToken;
+
+            if (saveOnChangeCheck)
+                Settings.Save();
 
             return result;
         }
@@ -329,20 +307,30 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
         /// <returns></returns>
         private static async Task<IOneDriveClient> GetClient()
         {
-            CredentialCache credentialCache = new CredentialCache();
-            string credentials = OneDriveCloudStorageServiceSettings.Default.Credentials;
-
-            if (!string.IsNullOrWhiteSpace(credentials))
-                credentialCache.InitializeCacheFromBlob(Encoding.Default.GetBytes(credentials));
-
-            IServiceInfoProvider serviceInfoProvider = new ServiceInfoProvider(new FormsWebAuthenticationUi())
+            if (m_client == null)
             {
-                UserSignInName = OneDriveCloudStorageServiceSettings.Default.UserId
-            };
+                CredentialCache credentialCache = new CredentialCache();
+                string credentials = OneDriveCloudStorageServiceSettings.Default.Credentials;
 
-            return await OneDriveClient.GetAuthenticatedMicrosoftAccountClient(
-                Util.Decrypt(OneDriveCloudStorageServiceSettings.Default.AppKey, CultureConstants.InvariantCulture.NativeName),
-                RedirectUri, s_scopes, serviceInfoProvider, credentialCache).ConfigureAwait(false);
+                if (!string.IsNullOrWhiteSpace(credentials))
+                    credentialCache.InitializeCacheFromBlob(Encoding.Default.GetBytes(credentials));
+
+                var credentialVault = new CredentialVault(Util.Decrypt(OneDriveCloudStorageServiceSettings.Default.AppKey, CultureConstants.InvariantCulture.NativeName));
+                credentialVault.AddCredentialCacheToVault(credentialCache);
+
+                var authenticationProvider = new MsaAuthenticationProvider(
+                    Util.Decrypt(OneDriveCloudStorageServiceSettings.Default.AppKey, CultureConstants.InvariantCulture.NativeName),
+                    RedirectUri,
+                    s_scopes,
+                    credentialVault
+                );
+
+                await authenticationProvider.AuthenticateUserAsync(OneDriveCloudStorageServiceSettings.Default.UserId);
+
+                m_client = new OneDriveClient(authenticationProvider);
+            }
+
+            return m_client;
         }
 
         /// <summary>
@@ -351,24 +339,13 @@ namespace EVEMon.Common.CloudStorageServices.OneDrive
         /// <returns></returns>
         private static async Task<string> GetFileIdAsync()
         {
-            try
-            {
-                using (OneDriveClient client = (OneDriveClient)await GetClient().ConfigureAwait(false))
-                {
-                    IItemRequest request = client.Drive.Special.AppRoot
-                        .ItemWithPath($"/{Uri.EscapeUriString(SettingsFileNameWithoutExtension)}")
-                        .Request();
-                    Item response = await request.GetAsync().ConfigureAwait(false);
-                    return response.Id;
-                }
-            }
-            catch (OneDriveException exc)
-            {
-                if (exc.IsMatch(OneDriveErrorCode.ItemNotFound.ToString()))
-                    return string.Empty;
-
-                throw;
-            }
+            var client = await GetClient().ConfigureAwait(false);
+                
+            IItemRequest request = client.Drive.Special.AppRoot
+                .ItemWithPath($"/{Uri.EscapeUriString(SettingsFileNameWithoutExtension)}")
+                .Request();
+            Item response = await request.GetAsync().ConfigureAwait(false);
+            return response.Id;
         }
 
         #endregion
