@@ -142,7 +142,7 @@ namespace EVEMon.Common.Net
         private static string GetProxyHost(Uri url)
             => HttpWebClientServiceState.Proxy.Enabled
                 ? HttpWebClientServiceState.Proxy.Host
-                : WebRequest.DefaultWebProxy.GetProxy(url).Host;
+                : url.Host;
 
         /// <summary>
         /// Parses a web exception to get an error message and a <see cref="HttpWebClientServiceExceptionStatus"/> status code.
