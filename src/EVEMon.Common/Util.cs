@@ -16,6 +16,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
@@ -46,7 +47,22 @@ namespace EVEMon.Common
 
             try
             {
-                Process.Start(url.AbsoluteUri);
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Process.Start(new ProcessStartInfo(url.AbsoluteUri) { UseShellExecute = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url.AbsoluteUri);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url.AbsoluteUri);
+                }
+                else
+                {
+                    Process.Start(url.AbsoluteUri);
+                }
             }
             catch (FileNotFoundException ex)
             {
