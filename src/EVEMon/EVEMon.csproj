@@ -22,6 +22,9 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup>
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+  <PropertyGroup>
     <Win32Resource>EVEMon.res</Win32Resource>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -280,7 +283,7 @@
   </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>
-        cd "..\..\..\..\..\tools\ResFileCreator\bin\$(Configuration)\net8.0-windows\"
+        cd "$(SolutionDir)tools\ResFileCreator\bin\$(Configuration)\net8.0-windows\"
         EVEMonResFileCreator.exe
     </PreBuildEvent>
   </PropertyGroup>
