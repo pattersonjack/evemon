@@ -992,9 +992,9 @@ namespace EVEMon.Common
             }
 
             byte[] encrypted;
-            using (var pdb = new Rfc2898DeriveBytes(password, Encoding.Unicode.GetBytes(password)))
+            using (var pdb = new Rfc2898DeriveBytes(password, Encoding.Unicode.GetBytes(password), 1000, HashAlgorithmName.SHA1))
             {
-                using (var aes = new AesCryptoServiceProvider())
+                using (var aes = Aes.Create())
                 {
                     var encryptor = aes.CreateEncryptor(pdb.GetBytes(32), pdb.GetBytes(16));
                     var msEncrypt = GetMemoryStream();
@@ -1041,9 +1041,9 @@ namespace EVEMon.Common
             }
 
             string decrypted;
-            using (var pdb = new Rfc2898DeriveBytes(password, Encoding.Unicode.GetBytes(password)))
+            using (var pdb = new Rfc2898DeriveBytes(password, Encoding.Unicode.GetBytes(password), 1000, HashAlgorithmName.SHA1))
             {
-                using (var aes = new AesCryptoServiceProvider())
+                using (var aes = Aes.Create())
                 {
                     try
                     {
@@ -1175,11 +1175,7 @@ namespace EVEMon.Common
         /// <returns>The URL safe encoded SHA-256 hash of that data.</returns>
         public static string SHA256Base64(byte[] data)
         {
-            string hash;
-            using (var sha = new SHA256Managed())
-            {
-                hash = URLSafeBase64(sha.ComputeHash(data));
-            }
+            var hash = URLSafeBase64(SHA256.HashData(data));
             return hash;
         }
     }
