@@ -180,9 +180,6 @@ namespace EVEMon
             // Check with NIST that the local clock is synchronized
             TimeCheck.ScheduleCheck(TimeSpan.FromSeconds(1));
 
-            // Notify Gooogle Analytics about start up
-            GAnalyticsTracker.TrackStart(GetType());
-
             // Prepare control's visibility
             menubarToolStripMenuItem.Checked = mainMenuBar.Visible = Settings.UI.MainWindow.ShowMenuBar;
             toolbarToolStripMenuItem.Checked = mainToolBar.Visible = !Settings.UI.MainWindow.ShowMenuBar;
@@ -309,7 +306,6 @@ namespace EVEMon
             if (!Visible || m_isUpdating || m_isUpdatingData || e.CloseReason == CloseReason.ApplicationExitCall ||
                 e.CloseReason == CloseReason.TaskManagerClosing || e.CloseReason == CloseReason.WindowsShutDown)
             {
-                GAnalyticsTracker.TrackEnd(GetType());
                 return;
             }
 
