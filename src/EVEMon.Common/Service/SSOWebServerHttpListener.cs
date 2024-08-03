@@ -1,13 +1,13 @@
 ﻿using EVEMon.Common.Constants;
-using EVEMon.Common.Helpers;
 using EVEMon.Common.Threading;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Specialized;
-using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace EVEMon.Common.Service
 {
@@ -23,16 +23,15 @@ namespace EVEMon.Common.Service
         public const int PORT = 4916;
         // Used for initializing the responses properly
         private static readonly object RESPONSE_LOCK = new object();
-        // Time before idle HTTP connections are closed
-        private static readonly TimeSpan TIMEOUT_IDLE = TimeSpan.FromSeconds(10.0);
-        // Time before connections are closed while waiting for read data
-        private static readonly TimeSpan TIMEOUT_READ = TimeSpan.FromSeconds(3.0);
-        // Time before connections are closed while waiting for write data
-        private static readonly TimeSpan TIMEOUT_WRITE = TimeSpan.FromSeconds(2.0);
+
+        private WebApplication listener;
 
         // Encoded responses for client requests
         private static byte[] responseOK = null;
         private static byte[] response404 = null;
+
+
+        private TaskCompletionSource<(string, string)> codeCompletionSource;
 
         // Initializes the text responses sent to the client
         private static void InitResponses()
@@ -47,29 +46,34 @@ namespace EVEMon.Common.Service
             }
         }
 
-        // The TCP listener used to receive requests
-        // We expect few requests, so we can get away with a single thread
-        private readonly HttpListener listener;
-
         public SSOWebServerHttpListener()
         {
-            if (!HttpListener.IsSupported)
-                throw new InvalidOperationException("HTTP listener not supported");
-            listener = new HttpListener();
             // Calculate prefix, must end with slash according to HttpListener documentation
             string prefix = string.Format(NetworkConstants.SSORedirect, PORT);
             if (!prefix.EndsWith("/"))
                 prefix += "/";
-            listener.Prefixes.Add(prefix);
-            // Where would the exception go otherwise?
-            listener.IgnoreWriteExceptions = true;
-            // Set up the desired timeouts
-            listener.TimeoutManager.IdleConnection = TIMEOUT_IDLE;
-            listener.TimeoutManager.DrainEntityBody = TIMEOUT_WRITE;
-            listener.TimeoutManager.EntityBody = TIMEOUT_READ;
-            listener.TimeoutManager.HeaderWait = TIMEOUT_READ;
-            listener.TimeoutManager.RequestQueue = TIMEOUT_WRITE;
+
             InitResponses();
+
+            var builder = WebApplication.CreateBuilder();
+            builder.WebHost.ConfigureKestrel(kestrel =>
+            {
+                kestrel.ListenLocalhost(PORT);
+            });
+
+            listener = builder.Build();
+
+            listener.MapGet("/callback", HandleCallback);
+        }
+
+        private async void HandleCallback(HttpContext context, [FromQuery] string code, [FromQuery] string state)
+        {
+            if (codeCompletionSource != null)
+            {
+                codeCompletionSource.SetResult((code, state));
+            }
+
+            await SendReponseAsync(context, code, state);
         }
 
         /// <summary>
@@ -86,36 +90,31 @@ namespace EVEMon.Common.Service
                 callback?.Invoke(result)));
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-            listener.Stop();
-            listener.Close();
+            try
+            {
+                await listener.StopAsync();
+            }
+            catch
+            {
+                // Ignore
+            }
         }
 
         /// <summary>
         /// Responds to the client which requests the specified URL.
         /// </summary>
         /// <param name="state">The SSO state used.</param>
-        /// <param name="output">The response where the output will be sent.</param>
-        /// <param name="queryParams">The arguments from the query.</param>
+        /// <param name="context">The response where the output will be sent.</param>
         /// <returns></returns>
-        private async Task<string> SendReponseAsync(string state, HttpListenerResponse output,
-            NameValueCollection queryParams)
+        private async Task SendReponseAsync(HttpContext context, string code, string state)
         {
-            string code = "";
             byte[] response;
             HttpStatusCode responseCode;
-            // Check for matching state in response
-            var stateParams = queryParams.GetValues("state");
-            if (stateParams != null && stateParams.Length == 1 && stateParams[0] == state)
-            {
-                var codeParams = queryParams.GetValues("code");
-                // Take the first one, only should be one
-                if (codeParams != null && codeParams.Length > 0)
-                    code = codeParams[0];
-            }
+
             // Choose the right response
-            if (string.IsNullOrEmpty(code))
+            if (string.IsNullOrEmpty(state) || string.IsNullOrEmpty(code))
             {
                 response = response404;
                 responseCode = HttpStatusCode.NotFound;
@@ -126,20 +125,17 @@ namespace EVEMon.Common.Service
                 responseCode = HttpStatusCode.OK;
             }
             // Send the response
-            using (var stream = output.OutputStream)
+            using (var stream = context.Response.BodyWriter.AsStream())
             {
                 int len = response.Length;
                 // HTTP response code
-                output.StatusCode = (int)responseCode;
-                // Supply the length
-                output.ContentLength64 = len;
+                context.Response.StatusCode = (int)responseCode;
+
                 // Supply content type and encoding
-                output.ContentType = "text/html";
-                output.ContentEncoding = Encoding.UTF8;
+                context.Response.ContentType = "text/html";
                 await stream.WriteAsync(response, 0, len);
                 await stream.FlushAsync();
             }
-            return code;
         }
 
         /// <summary>
@@ -147,69 +143,34 @@ namespace EVEMon.Common.Service
         /// </summary>
         public void Start()
         {
-            try
-            {
-                listener.Start();
-            }
-            catch (HttpListenerException e)
-            {
-                ExceptionHandler.LogException(e, true);
-                throw new IOException("Error when starting server", e);
-            }
+            listener.RunAsync();
         }
 
         /// <summary>
         /// Stops the web server.
         /// </summary>
-        public void Stop()
+        public async void Stop()
         {
-            try
-            {
-                listener.Stop();
-            }
-            catch (HttpListenerException e)
-            {
-                ExceptionHandler.LogException(e, true);
-            }
+            await listener.StopAsync();
         }
 
         /// <summary>
         /// Waits for the auth code asynchronously; the reported state must match the argument.
         /// </summary>
-        /// <param name="state">The SSO state.</param>
+        /// <param name="expectedState">The SSO state.</param>
         /// <returns>The token received, or null if none was received.</returns>
-        public async Task<string> WaitForCodeAsync(string state)
+        public async Task<string> WaitForCodeAsync(string expectedState)
         {
-            // Blank states are bad
-            if (string.IsNullOrEmpty(state))
-                throw new ArgumentNullException("state");
-            string code = string.Empty;
-            try
+            codeCompletionSource = new();
+
+            var (code, state) = await codeCompletionSource.Task;
+
+            if (expectedState == state)
             {
-                do
-                {
-                    // Accept client
-                    var context = await listener.GetContextAsync().ConfigureAwait(false);
-                    using (var output = context.Response)
-                    {
-                        // Check for state in the URL
-                        string query = context.Request.Url.Query;
-                        if (query == null)
-                            query = "";
-                        var queryParams = HttpUtility.ParseQueryString(query);
-                        code = await SendReponseAsync(state, output, queryParams);
-                    }
-                } while (string.IsNullOrEmpty(code));
+                return code; 
             }
-            catch (ObjectDisposedException)
-            {
-                // Happens normally while shutting down
-            }
-            catch (HttpListenerException e)
-            {
-                throw new IOException("Error when waiting for auth code", e);
-            }
-            return code;
+
+            return null;
         }
     }
 }
