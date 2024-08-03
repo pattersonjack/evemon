@@ -141,9 +141,9 @@ namespace EVEMon.Common.Service
         /// <summary>
         /// Starts the web server.
         /// </summary>
-        public void Start()
+        public async void Start()
         {
-            listener.RunAsync();
+            await listener.RunAsync();
         }
 
         /// <summary>
